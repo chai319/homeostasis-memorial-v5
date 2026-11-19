@@ -687,8 +687,7 @@ $("map-button").addEventListener("click",showMap);
 $("milestone-notebook").addEventListener("click",()=>notebook());$("settings-button").addEventListener("click",settings);$("close-modal").addEventListener("click",()=>{inferenceOffer=null;$("modal").close();growth.flush();});
 $("replay-credits").addEventListener("click",playCredits);
 $("back-title").addEventListener("click",()=>{growth.reset();$("game-screen").hidden=true;$("title-screen").hidden=false;$("load-title").disabled=!localStorage.getItem(SAVE);requestMusic("title");flushMusic();});
-$("cast-gender").addEventListener("change",()=>{$("title-art").src=assets.characters["insulin-"+$("cast-gender").value].expression.neutral;});
-$("title-art").src=assets.characters["insulin-female"].expression.neutral;
+
 
 document.addEventListener("pointerdown",()=>audio.unlock(),{once:true});
 let dialogueGesture=null,holdTimer=null,holdInterval=null;

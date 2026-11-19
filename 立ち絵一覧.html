@@ -33,6 +33,7 @@
   <script src="asset-manifest.js"></script>
   <script src="v5-art-data.js?v=v5-arrivals-1"></script>
   <script src="v5-expanded-art.js?v=v5-arrivals-1"></script>
+  <script src="v5-expression-art.js?v=1"></script>
   <script>
     (function () {
       'use strict';
@@ -79,6 +80,17 @@
           const person = window.HMV5Art[key];
           const group = element('div');
           const portraits = Object.values(person.variants);
+          const expressions = window.HMV5ExpressionArt?.[key];
+          if (expressions) {
+            const names = {happy:'笑顔',blush:'照れ',worried:'心配',surprised:'驚き',angry:'怒り',rage:'本気の怒り',listless:'元気のない顔',depressed:'落ち込み',playful:'いたずらな笑顔',trust:'信頼',joyful_tears:'うれし涙',tears:'涙',sorrow:'悲しみ'};
+            group.append(element('h3', person.name),element('h4','制服・表情'),portraitGroup([
+              {...person.variants.neutral,label:'通常'},
+              ...Object.entries(expressions).map(([name,asset])=>({...asset,label:names[name]})),
+            ],person.name));
+            group.append(element('h4','ポーズ・衣装'),portraitGroup(portraits.filter(image=>image!==person.variants.neutral),person.name));
+            rows.append(group);
+            continue;
+          }
           group.append(element('h3', person.name), portraitGroup(portraits.filter(image => !image.scene), person.name));
           const route = portraits.filter(image => image.scene);
           if (route.length) group.append(element('h4', '追加差分'), portraitGroup(route, person.name));

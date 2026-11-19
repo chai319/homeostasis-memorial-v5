@@ -14,12 +14,20 @@
   for (const [key, { variants, stage }] of Object.entries(global.HMV5Art)) {
     const expression = { neutral: variants.neutral.src };
     if (variants.expression) expression[reactions[key]] = variants.expression.src;
+    for (const [name, asset] of Object.entries(global.HMV5ExpressionArt?.[key] || {})) {
+      expression[name] = asset.src;
+      poseMetrics[asset.src] = asset.frame;
+    }
     const acting = {};
     if (variants.special && key.startsWith('twin-')) {
       const relieved = variants.relieved?.src || variants.special.src;
       fieldwork[key] = { neutral: variants.special.src, happy: relieved, blush: relieved };
     }
     const labels = {};
+    if (global.HMV5ExpressionArt?.[key] && variants.expression) {
+      acting['v5-reaction-original'] = variants.expression.src;
+      labels['v5-reaction-original'] = '初登場の反応';
+    }
     for (const [pose, asset] of Object.entries(variants)) {
       if (['neutral', 'expression'].includes(pose)) continue;
       const act = 'v5-' + pose;

@@ -263,7 +263,8 @@
       data.pools[actor].info1[0][0].v5Schedule = key;
       data.scenes.find(scene => scene.id === 'p_' + key + '_1').after.at(-1).v5Schedule = key;
     }
-    return global.HMV5PoseCues ? global.HMV5PoseCues.apply(data) : data;
+    const staged = global.HMV5PoseCues ? global.HMV5PoseCues.apply(data) : data;
+    return global.HMV5ExpressionCues ? global.HMV5ExpressionCues.apply(staged) : staged;
   }
 
   class Game extends global.HMPlaytest.Game {

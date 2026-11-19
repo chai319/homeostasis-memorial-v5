@@ -3,7 +3,7 @@ const path=require('node:path');
 const fs=require('node:fs');
 const root=path.resolve(__dirname,'..');
 global.window=global;
-for(const script of ['game-v4','rng-v4','localization-v4','voice-variants-v45','performance-cues-v45','presentation-v45','core-v45','playtest-content-v4','playtest-revision-v4','v45-runtime-policy','v45-display-patches','playtest-revision-v45','v5-twin-script','v5-extra-scripts','v5-pose-cues','v5-pilot','characters','stage-metrics','asset-manifest','v5-art-data','v5-expanded-art','v5-portraits','portrait-collection-v45'])require(path.join(root,script+'.js'));
+for(const script of ['game-v4','rng-v4','localization-v4','voice-variants-v45','performance-cues-v45','presentation-v45','core-v45','playtest-content-v4','playtest-revision-v4','v45-runtime-policy','v45-display-patches','playtest-revision-v45','v5-twin-script','v5-extra-scripts','v5-pose-cues','v5-expression-cues','v5-pilot','characters','stage-metrics','asset-manifest','v5-art-data','v5-expanded-art','v5-expression-art','v5-portraits','portrait-collection-v45'])require(path.join(root,script+'.js'));
 const data=HMV5Pilot.buildData(HM_GAME_V4);
 const base=new HMPlaytest.Game(HM_GAME_V4,1);
 assert.deepEqual(HMCore.validate(data).errors,[]);

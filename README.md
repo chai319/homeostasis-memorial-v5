@@ -18,6 +18,7 @@ GitHubの **Code → Download ZIP** からダウンロードして展開し、�
 node tests/season.cjs
 node tests/player.cjs
 node tests/portraits.cjs
+node tests/expressions.cjs
 ```
 
 通しプレイと分岐、画面操作とセーブの再現、立ち絵の呼び出しをそれぞれ検証します。画面操作のテストは模擬DOMを使用します。

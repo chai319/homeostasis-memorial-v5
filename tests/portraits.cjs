@@ -6,7 +6,7 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 global.window=global;
 for(const [,src] of html.matchAll(/<script src="([^"]+)"/g)){
  const filename=src.split('?')[0];
- if(filename!=='app-v45.js')require(path.join(root,filename));
+ if(!['app-v45.js','title-screen-v5.js'].includes(filename))require(path.join(root,filename));
 }
 const d=HMV5Pilot.buildData(HM_GAME_V4);
 const fresh=()=>new HMV5Pilot.Game(d,71);
@@ -15,7 +15,7 @@ assert.deepEqual(HMCore.validate(fresh().d).errors,[]);
 const art=HMPortraitCollection.catalog(HM_ASSETS,HM_LAKE_SPRITES,HM_CHARACTERS);
 const newCount=Object.fromEntries(art.filter(p=>/^twin|^ami|^yori|^tsumugi|^shiori/.test(p.who)).map(p=>[p.key,p.entries.length]));
 for(const role of ['twin','ami','yori']){
- for(const gender of ['female','male'])assert.equal(newCount[role+'-'+gender],23,role+'-'+gender);
+ for(const gender of ['female','male'])assert.equal(newCount[role+'-'+gender],36,role+'-'+gender);
 }
 assert.equal(newCount.tsumugi,8);
 assert.equal(newCount.shiori,8);

@@ -114,11 +114,17 @@ for(const [target,route] of Object.entries(routes).filter(([key])=>!process.env.
   assert(app.validation.ok);
   assert.deepEqual([...context.HM_ENDING_CREDITS.cast.map(c=>c.id).filter(id=>id===route.id+'-'+cast)],[route.id+'-'+cast]);
   app.begin({seed:Number(process.env.UI_SEED||({mzt:4,ami:6,yor:9})[target]),gender:cast,player:{sei:'春野',mei:'悠',gender:player}});
+  let expressionViews=0;
   let sawIntro=false,sawConfess=false,sawAccepted=false,saved=false,sawMap=false,invitation=false;
   for(let i=0;i<5000;i++){
    assert.deepEqual(errors,[]);
    const e=app.current,g=app.game;
    const sprite=dom.get('cast-stage').children.find(n=>n.dataset.character===route.id);
+   if(e.type==='line'&&e.line.who===route.id&&e.line.expr&&e.line.expr!=='neutral'&&sprite&&!sprite.dataset.actualAct&&!g.date_actor&&!e.scene?.v5Outfit&&e.scene?.outfit!=='swim'){
+    const src=context.HM_ASSETS.characters[route.id+'-'+cast].expression[e.line.expr];
+    assert.equal(sprite.firstElementChild.src,src,e.scene?.id+' '+e.line.expr);
+    expressionViews++;
+   }
    if(e.type==='line'&&e.scene?.id===route.debut&&e.line.who===route.id){
     sawIntro=true;
     assert.equal(dom.get('speaker').textContent,expected);
@@ -146,6 +152,7 @@ for(const [target,route] of Object.entries(routes).filter(([key])=>!process.env.
    }
    if(e.type==='complete'){
     assert.equal(e.ending,'end_'+target,JSON.stringify({f:g.fr[target],t:g.tk[target],u:g.und[target],ident:g.ident[target],stats:g.st,spots:g.spot_visits,sawIntro,sawConfess,sawAccepted,saved,invitation,sawMap}));
+    assert(expressionViews>=10,expressionViews+' expression frames');
     assert(sawIntro&&sawConfess&&sawAccepted&&saved&&invitation&&sawMap,JSON.stringify({target,cast,sawIntro,sawConfess,sawAccepted,saved,invitation,sawMap}));
     app.notebook('教科書');
     assert(dom.get('modal-content').textContent.includes(expected+' · '+route.term));

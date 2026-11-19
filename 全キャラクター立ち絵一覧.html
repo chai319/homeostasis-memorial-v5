@@ -32,6 +32,7 @@ figcaption{font-size:.86rem;line-height:1.4;margin:.4rem 0}
 <script src="portrait-collection-v45.js"></script>
 <script src="v5-art-data.js"></script>
 <script src="v5-expanded-art.js"></script>
+<script src="v5-expression-art.js?v=1"></script>
 <script>
 (function(){
   'use strict';
@@ -45,9 +46,11 @@ figcaption{font-size:.86rem;line-height:1.4;margin:.4rem 0}
   for(const [key,person] of Object.entries(window.HMV5Art)){
     const expression={neutral:person.variants.neutral.src},acting={},labels={};
     for(const [pose,asset] of Object.entries(person.variants)){
-      if(pose==='neutral')continue;
+      if(['neutral','expression'].includes(pose))continue;
       acting[pose]=asset.src;labels[pose]=asset.label;
     }
+    for(const [name,asset] of Object.entries(window.HMV5ExpressionArt?.[key]||{}))expression[name]=asset.src;
+    if(person.variants.expression){acting['expression-original']=person.variants.expression.src;labels['expression-original']='初登場の反応';}
     window.HM_ASSETS.characters[key]={expression,acting,labels};
   }
   const people=window.HMPortraitCollection.catalog(window.HM_ASSETS,window.HM_LAKE_SPRITES,[...window.HM_CHARACTERS,...profiles]);

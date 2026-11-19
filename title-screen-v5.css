@@ -1,27 +1,12 @@
 /* Scope the poster treatment to the title so the game keeps its established UI. */
 #title-screen{isolation:isolate;display:block;min-height:620px;background:#eaf4f8;color:#052c5f;overflow:auto}
 #title-screen:after{inset:auto 0 0;width:100%;height:9px;transform:none;background:#00c4f1}
-.title-ensemble{position:absolute;inset:0 30% 0 0;overflow:hidden;background:linear-gradient(140deg,#def9ff,#91c3e1 52%,#2067a9)}
-.title-ensemble:after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(170deg,#eaf9ff22,transparent 40%,#052e6988);box-shadow:inset -30px 0 60px #eaf4f8}
-.title-person{position:absolute;width:24%;height:44%;overflow:hidden;filter:grayscale(1) sepia(1) saturate(2) hue-rotate(157deg);opacity:.8}
-.title-person img{position:absolute;top:0;left:50%;height:285%;width:auto;max-width:none;transform:translateX(-50%);object-fit:contain}
-.title-person-0{left:0;top:0}
-.title-person-1{left:24%;top:-4%}
-.title-person-2{left:48%;top:0}
-.title-person-3{left:72%;top:0}
-.title-person-4{left:-2%;top:31%}
-.title-person-5{left:23%;top:29%}
-.title-person-6{left:56%;top:32%;width:22%}
-.title-person-7{left:78%;top:32%;width:22%}
-.title-person-8{left:0;top:78%}
-.title-person-9{left:22%;top:78%}
-.title-person-10{left:43%;top:78%}
-.title-person-11{left:65%;top:78%}
-.title-person-12{left:29%;top:15%;width:28%;height:65%;filter:none;opacity:1;z-index:1}
-.title-person-12 img{height:155%}
-.title-wordmark{position:absolute;z-index:3;left:2%;top:42%;width:66%;text-align:center;pointer-events:none;transform:skewY(-5deg);color:#fff;text-shadow:0 3px 0 #073d70,0 8px 30px #00295788}
+.title-ensemble{position:absolute;inset:0 30% 0 0;overflow:hidden;background:#eaf4f8}
+.title-ensemble:after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,#eaf4f8 0%,transparent 8%,transparent 92%,#eaf4f8 100%)}
+.title-keyvisual{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+.title-wordmark{position:absolute;z-index:3;left:2%;top:56%;width:66%;text-align:center;pointer-events:none;transform:skewY(-5deg);color:#073d70;text-shadow:0 2px 0 white,0 3px 22px #ffffffdd}
 .title-wordmark p{font-size:clamp(18px,2.6vw,40px);font-weight:800;letter-spacing:.06em;margin:0}
-.title-wordmark h1{font-family:Impact,"Arial Black",sans-serif;font-style:italic;font-size:clamp(150px,19vw,320px);font-weight:900;letter-spacing:-.1em;line-height:.87;margin:8px 0 12px;padding-right:.09em;-webkit-text-stroke:2px #e2fbff}
+.title-wordmark h1{font-family:Impact,"Arial Black",sans-serif;font-style:italic;font-size:clamp(130px,14.5vw,270px);font-weight:900;letter-spacing:-.1em;line-height:.87;margin:8px 0 12px;padding-right:.09em;-webkit-text-stroke:2px #e2fbff}
 .title-wordmark span{font-family:"Arial Narrow",sans-serif;font-size:clamp(10px,1.2vw,18px);letter-spacing:.28em}
 #title-screen .title-copy{position:relative;z-index:4;margin:0 0 0 70%;width:30%;min-height:100%;padding:clamp(22px,3vw,54px);display:flex;flex-direction:column;justify-content:center;background:linear-gradient(90deg,#eaf4f8ed,#f6fbff)}
 #title-screen form{grid-template-columns:1fr;gap:16px}
@@ -35,9 +20,9 @@
 @media(max-width:700px){
  #title-screen{height:100dvh;min-height:0}
  .title-ensemble{inset:0 0 auto;height:59dvh;min-height:320px}
- .title-wordmark{left:2%;top:20dvh;width:96%}
+ .title-wordmark{left:2%;top:32dvh;width:96%}
  .title-wordmark p{font-size:clamp(19px,5vw,30px)}
- .title-wordmark h1{font-size:clamp(150px,39vw,260px)}
+ .title-wordmark h1{font-size:clamp(100px,27vw,180px)}
  #title-screen .title-copy{margin:0;padding:25px 24px 32px;width:100%;min-height:0;top:max(59dvh,320px)}
  #title-screen form{grid-template-columns:1fr 1fr;gap:12px}
  #title-screen .primary{grid-column:1/-1}

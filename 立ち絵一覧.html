@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>恒常性メモリアル V5の立ち絵</title>
+  <style>
+    :root{color-scheme:light;background:#f3f1eb;color:#192735;font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+    body{margin:0}main{max-width:1060px;margin:auto;padding:clamp(18px,5vw,48px)}
+    h1{font-size:clamp(1.65rem,4vw,2.6rem);line-height:1.25;margin:.4em 0}
+    h2{font-size:1.4rem;margin:0 0 .3em}h3{font-size:1rem;margin:.1em 0 .65em}
+    h4{font-size:.85rem;margin:.9em 0 .5em;color:#354553}
+    p{line-height:1.65;margin:.35em 0 .9em}a{color:#194568}a:focus-visible{outline:3px solid #194568;outline-offset:4px}
+    section{border-top:1px solid #b6bdbe;margin:30px 0;padding-top:20px}
+    .rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px}
+    .portraits{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,92px),1fr));gap:8px;max-width:640px}
+    figure{margin:0;min-width:0}figure a{display:block;line-height:0}
+    img{display:block;width:100%;height:clamp(130px,30vw,248px);object-fit:contain;background:#dce4e6}
+    figcaption{font-size:.84rem;line-height:1.4;margin:.35em 0;color:#354553}
+    @media(max-width:380px){.portraits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>恒常性メモリアル V5の立ち絵</h1>
+    <p><a href="index.html">先行試遊版を開く</a>　画像を選ぶと透過WebPを原寸で表示します。</p>
+    <section>
+      <h2>V4の比較用立ち絵</h2>
+      <div id="reference" class="portraits"></div>
+    </section>
+    <div id="cast"></div>
+  </main>
+  <script src="asset-manifest.js"></script>
+  <script src="v5-art-data.js?v=v5-arrivals-1"></script>
+  <script src="v5-expanded-art.js?v=v5-arrivals-1"></script>
+  <script>
+    (function () {
+      'use strict';
+      const element = (tag, text, cls) => {
+        const node = document.createElement(tag);
+        if (text) node.textContent = text;
+        if (cls) node.className = cls;
+        return node;
+      };
+      function figure(src, label, name) {
+        const view = element('figure');
+        const link = element('a');
+        link.href = src;
+        const image = element('img');
+        image.src = src;
+        image.alt = `${name}・${label}`;
+        image.loading = 'lazy';
+        link.append(image);
+        view.append(link, element('figcaption', label));
+        return view;
+      }
+      function portraitGroup(entries, name) {
+        const portraits = element('div', '', 'portraits');
+        for (const { src, label } of entries) portraits.append(figure(src, label, name));
+        return portraits;
+      }
+      const reference = document.querySelector('#reference');
+      for (const [key, name] of [['adh-female', '水守 しずく'], ['adh-male', '水守 雫生'],
+        ['cortisol-female', '備 しずか'], ['cortisol-male', '備 静也']]) {
+        reference.append(figure(window.HM_ASSETS.characters[key].expression.neutral, name, 'V4'));
+      }
+      const groups = [
+        ['水守家の双子', 'くすんだ青の髪に差した細いヘアピン、灰色のネクタイ、点呼板。長さと向きの異なる髪型で、V4水守の明るい青と白いカーディガンから見分けられます。', ['twin-female', 'twin-male']],
+        ['糖解アミ', '片目にかかる白銀の前髪、ゆるいネクタイ、腰の布巾。調理中は表情が引き締まります。', ['ami-female', 'ami-male']],
+        ['白守頼', 'ミルクティー色の編み髪、深い赤のネクタイ、茶色の救護鞄。先輩らしい姿勢と、うっかりした瞬間の表情を揃えました。', ['yori-female', 'yori-male']],
+        ['結城つむぎと備汐里', 'つむぎは梅色の編みひもと休憩の札。汐里は深緑のリボンと小さな塩の帳面。', ['tsumugi', 'shiori']],
+      ];
+      const cast = document.querySelector('#cast');
+      for (const [title, description, keys] of groups) {
+        const section = element('section');
+        const rows = element('div', '', 'rows');
+        section.append(element('h2', title), element('p', description), rows);
+        for (const key of keys) {
+          const person = window.HMV5Art[key];
+          const group = element('div');
+          const portraits = Object.values(person.variants);
+          group.append(element('h3', person.name), portraitGroup(portraits.filter(image => !image.scene), person.name));
+          const route = portraits.filter(image => image.scene);
+          if (route.length) group.append(element('h4', '追加差分'), portraitGroup(route, person.name));
+          rows.append(group);
+        }
+        cast.append(section);
+      }
+    })();
+  </script>
+</body>
+</html>

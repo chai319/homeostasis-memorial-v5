@@ -153,8 +153,8 @@
     R.identify.shared_textbook = { mzt: 'adh' };
     R.identify.textbook_common = { adh: structuredClone(script.pools.textbook[0]) };
     R.identify.textbook_roles = {
-      adh: '最後の水門。集合管のV2受容体を介して、水の再吸収を増やす働きを表す。',
-      mzt: '血管の模型。血管平滑筋のV1a受容体を介して血管を収縮させ、血圧を支える働きを表す。',
+      adh: '最後の水門。集合管で、水の再吸収を増やす働きを表す。',
+      mzt: '血管の模型。血管を収縮させ、血圧を支える働きを表す。',
     };
     R.pairs.mzt = 'adh';
 

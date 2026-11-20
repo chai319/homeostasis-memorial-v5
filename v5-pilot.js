@@ -151,21 +151,16 @@
     R.identify.answer.mzt = R.identify.answer.adh;
     R.identify.key_notes = { mzt: Object.values(script.clues) };
     R.identify.shared_textbook = { mzt: 'adh' };
-    R.identify.textbook_common = {
-      adh: [
-        script.pools.textbook[0][0],
-        { who: 'narr', text: '腎臓の集合管で水の再吸収を増やし、尿量を減らす。体液の浸透圧が上がると放出が増え、浸透圧が元の範囲に戻ると放出も減る。' },
-      ],
-    };
+    R.identify.textbook_common = { adh: structuredClone(script.pools.textbook[0]) };
     R.identify.textbook_roles = {
-      adh: '最後の水門。集合管で水を取り戻す働きを描く。',
-      mzt: '巡回と連絡。体液の状態に応じて合図が強まり、回復すると弱まる働きを描く。',
+      adh: '最後の水門。集合管のV2受容体を介して、水の再吸収を増やす働きを表す。',
+      mzt: '血管の模型。血管平滑筋のV1a受容体を介して血管を収縮させ、血圧を支える働きを表す。',
     };
     R.pairs.mzt = 'adh';
 
     R.minigames.borrow.choice_count = 6;
     R.minigames.borrow.cards.adh[0] = '最後の水門で、出ていく水を減らす人';
-    R.minigames.borrow.cards.mzt = ['班の返事を確かめて、中枢先生へ巡回の報告を届ける人'];
+    R.minigames.borrow.cards.mzt = ['血圧が大きく下がったとき、管の壁を縮めて支える人'];
     R.acting.ids.push(...portraitActs);
     for (const [key,route] of Object.entries(routes)) addRoute(data,key,route,extra[key]);
     R.identify.wrong_hints['アミラーゼ'] = 'アミラーゼは吸収される前のでんぷんの消化を助ける酵素。集めた記録の持ち場を確かめよう。';
@@ -191,7 +186,7 @@
     addEventChoice(scenes, 'ev_park', '巡回の{瑞}と園内を回る', 'ev_park_mzt', { mzt: 5 }, 'ひと息つける場所を見つけた。一緒に回る？');
     addEventChoice(scenes, 'ev_assign', '巡回と連絡', 'ev_assign_mzt', { mzt: 3 }, '巡回と連絡。休憩所の声を聞いてくれる人に来てほしい。');
     addEventChoice(scenes, 'fs2_open', '{瑞}と入る', 'fs2_cafe_mzt', { mzt: 4 });
-    addEventChoice(scenes, 'fs2_exhibit', '保健委員会「水門に届く手紙」', 'fs2_ex_mzt', { mzt: 4 });
+    addEventChoice(scenes, 'fs2_exhibit', '保健委員会「水門と血管に届く合図」', 'fs2_ex_mzt', { mzt: 4 });
     addEventChoice(scenes, 'ev_park', 'アミと屋台の味見', 'ev_park_ami', { ami: 5 }, '並ぶ前に、どれ食べたいか聞いていい？');
     addEventChoice(scenes, 'ev_park', '頼先輩と花のある広場へ', 'ev_park_yor', { yor: 5 }, '地図のこの花の印、見に行きたい人はいる？');
     addEventChoice(scenes, 'ev_assign', '下ごしらえと試作', 'ev_assign_ami', { ami: 3 }, '試作の台を一つ空けてある。仕上げまで一緒に見てくれる人、いる？');
@@ -255,7 +250,7 @@
     const wake = scenes.get('ep_wake');
     const firstRoleSummary = wake.lines.findIndex(line => line.text.startsWith('朝ごはんを食べれば'));
     wake.lines.splice(firstRoleSummary + 1,0,{
-      who:'narr',text:'食べたものを小さくする人。体の中で、異物を片づける人。いつもの範囲へ戻ったとき、その知らせを届ける人もいる。',
+      who:'narr',text:'食べたものを小さくする人。体の中で、異物を片づける人。水を取り戻す働きと、血管を縮めて血圧を支える働き。同じ合図が届いても、場所によって起きることが違う。',
     });
     data.pools.twin = structuredClone(script.pools);
     for (const key of Object.keys(debut)) {

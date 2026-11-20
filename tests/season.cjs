@@ -174,6 +174,9 @@ for(const first of ['adh','mzt']){
  assert.equal(g.st.rika,before.rika+2);
  assert(one.events.some(f=>f.event.line?.text.includes('視床下部の神経分泌細胞')));
  assert(!two.events.some(f=>f.event.line?.text.includes('視床下部の神経分泌細胞')));
+ assert(one.events.some(f=>/V2受容体.*水の再吸収.*V1a受容体.*血管を収縮/.test(f.event.line?.text)));
+ assert.match(data.rules.identify.textbook_roles.adh,/集合管のV2受容体/);
+ assert.match(data.rules.identify.textbook_roles.mzt,/血管平滑筋のV1a受容体/);
 }
 {
  const g=new HMV5Pilot.Game(data,8);

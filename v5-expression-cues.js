@@ -21,7 +21,7 @@
       ['worried','cv_mzt_08','ちょっと聞いてもいい'],
       ['trust','cv_mzt_08','合わせられるなら合わせたい'],
       ['happy','cv_mzt_09','見られてそうだけどね'],
-      ['happy','cv_mzt_10','どこか寄っていい日'],
+      ['happy','cv_mzt_10','どこか寄っていける日'],
       ['playful','cv_mzt_11','自慢していい'],
       ['worried','cv_mzt_12','全部約束みたいに聞こえる'],
       ['blush','cv_mzt_12','来月も会える日があったら'],
@@ -43,7 +43,7 @@
       ['worried','fs2_ghost_mzt','袖をつまんでてもいい'],
       ['playful','fs2_ghost_mzt','予定を決めるのが早いね'],
       ['blush','fs2_sun_mzt','一緒に見るなら'],
-      ['joyful_tears','fs2_crisis_mzt','戻ったことも、ちゃんと聞けた'],
+      ['joyful_tears','fs2_crisis_mzt','戻ったことも、ちゃんと確かめられた'],
     ],
     ami:[
       ['listless','p_ami_1','日直かと思った'],

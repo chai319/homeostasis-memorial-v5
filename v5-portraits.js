@@ -45,17 +45,17 @@
   const credits = global.HM_ENDING_CREDITS;
   if (credits) {
     const lines = {
-      twin: ['次の角まで。','その先は、着いてから聞くね。'],
-      ami: ['次は、','二人で座って食べる分。'],
-      yori: ['今度は、','描きたい色を先に聞くね。'],
+      twin: {female:['あっていい。','じゃあ、静かに歩こう。','次の角まで。'], male:['次の角まで、','一緒に帰りたい。','その先も行きたくなったら、','そのときもう一度聞くね。']},
+      ami: {female:['今日の最後の一皿。','試作じゃないよ。','もう、きみと一緒に食べる分にしてきた。'], male:['うん。','……半分こにして、','一緒に最後まで食べよ。']},
+      yori: {female:['次に描く時も、','見に来る？','用事として頼むより、','誘う方がうれしいかも。'], male:['きみと一緒なら、','同じ道を戻っても','違うところに目が行くと思う。']},
       tsumugi: ['うん。','いまのはちゃんと、本人の返事。'],
       shiori: ['塩の帳面はこっち。','別々に記録しとくから。'],
     };
     const colors = {twin:'#a8d9ef',ami:'#cbd9e8',yori:'#ebc18c',tsumugi:'#efbfa4',shiori:'#b9d8c7'};
     const endingExpressions = {twin:'happy', ami:'happy', yori:'happy', tsumugi:'happy', shiori:'playful'};
     for (const person of global.HMV5Pilot.profiles) {
-      const quotePhrases = lines[person.id];
       for (const gender of person.fixedArt ? ['female'] : ['female','male']) {
+        const quotePhrases = person.fixedArt ? lines[person.id] : lines[person.id][gender];
         const id = person.fixedArt || person.id + '-' + gender;
         const image = assets.characters[id].expression[endingExpressions[person.id]];
         credits.cast.splice(credits.cast.length - 1, 0, {

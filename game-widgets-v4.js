@@ -42,8 +42,8 @@ function minigame({event:e,game,name,portrait,submit,key}){
   const description=el('p',`${e.number} / ${e.total} 枚目の封筒`),cards=el('div',undefined,'borrow-cards'),loading=[];root.append(description);
   for(const t of e.cards||game.targets){const b=button('',()=>finish(t)),face=el('span',undefined,'mini-face'),img=el('img'),label=el('span',name(game.CID[t]));img.src=portrait(game.CID[t]);img.alt='';face.append(img);b.append(face,label);b.dataset.target=t;cards.append(b);loading.push(img.decode().catch(()=>{}));}
   const start=button('封筒を開く',()=>{
-   start.remove();status.textContent=game.R.minigames.borrow.cards[e.target][0];root.append(cards);let left=10;
-   const countdown=el('p','残り10秒','mini-countdown');root.append(countdown);
+   start.remove();status.textContent=game.R.minigames.borrow.cards[e.target][0];let left=10;
+   const countdown=el('p','残り10秒','mini-countdown');root.append(countdown,cards);
    const tick=()=>{countdown.textContent=`残り${--left}秒`;if(left<=0)finish(null);else later(tick,1000);};later(tick,1000);
   });start.disabled=true;Promise.all(loading).then(()=>{if(!disposed)start.disabled=false;});root.append(start);
  }else{

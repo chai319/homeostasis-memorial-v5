@@ -66,7 +66,7 @@
 .ed-color-shadow{position:absolute;inset:0;background:var(--ed-accent);mask-image:var(--ed-person-art);-webkit-mask-image:var(--ed-person-art);mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center bottom;-webkit-mask-position:center bottom;mask-size:contain;-webkit-mask-size:contain;transform:translate(24px,-3px);opacity:.8;z-index:-1}
 .ed-art-bust .ed-color-shadow{mask-size:auto 220%;-webkit-mask-size:auto 220%;mask-position:center top;-webkit-mask-position:center top;transform:translate(26px,2px)}
 .ending-credits[data-shot=quote] .ed-quote-lead{opacity:1}
-.ending-credits[data-shot=quote] .ed-person-copy,.ending-credits[data-shot=quote] .ed-portrait{opacity:0;translate:12px 0}
+.ending-credits[data-shot=quote] .ed-person-copy,.ending-credits[data-shot=quote] .ed-portrait{opacity:0;visibility:hidden;translate:12px 0}
 .ending-credits[data-shot=bust] .ed-art-bust,.ending-credits[data-shot=full] .ed-art-full{opacity:1}
 .ed-credit dt{color:#b7ddff;font-weight:700}.ed-credit dd{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;font-weight:750}.ed-thanks{color:#acd7ff}
 .ed-toolbar{background:linear-gradient(transparent,#071326db);border-color:#8cc8ff30}.ed-toolbar input{height:44px;accent-color:#8fcdff}.ed-gate button{background:#c2e7ff;border-color:#c2e7ff}.ed-gate{background:#071326e8}

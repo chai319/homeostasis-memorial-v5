@@ -72,11 +72,21 @@ function schedulePortraitCollection(){
 let musicId='title';
 const endingCredits=new window.HMEndingCredits(window.HM_ENDING_CREDITS);
 let creditsViewed=false;
+function stopGameMusic(){
+ ++audio.token;
+ if(audio.current){audio.current.pause();audio.current.removeAttribute("src");audio.current.load();}
+ audio.current=null;audio.id=null;
+}
 function playCredits(){
  if(current?.type!=="complete"||endingCredits.active)return;
  stopHold();growth.reset();$("modal").close();
- ++audio.token;if(audio.current){audio.current.pause();audio.current.removeAttribute("src");audio.current.load();}audio.current=null;audio.id=null;
+ stopGameMusic();
  endingCredits.open({autoplay:true,volume:options.bgmVolume??.3,onFinish:()=>{creditsViewed=true;requestMusic("ending");flushMusic();$("replay-credits").focus({preventScroll:true});}});
+}
+function previewCredits(){
+ if(endingCredits.active)return;
+ stopGameMusic();
+ endingCredits.open({volume:options.bgmVolume??.3,onFinish:()=>{requestMusic("title");flushMusic();}});
 }
 function requestMusic(id){if(id&&id!=='keep')musicId=id;}
 function flushMusic(){if(endingCredits.active)return;if(restoring)return;audio.play(musicId);$('game-screen').dataset.bgm=musicId;}
@@ -703,5 +713,5 @@ $("modal").addEventListener("close",schedulePortraitCollection);
 const stageObserver=new ResizeObserver(updateStageBounds);stageObserver.observe(document.querySelector(".hud"));stageObserver.observe($("status-toast"));
 if(!report.ok){$("title-status").textContent="台本の読み込みに問題があります。";$("start-form").querySelector("button").disabled=true;}
 requestMusic("title");flushMusic();
-window.HM_APP={get game(){return game;},get current(){return current;},get inferenceOffer(){return inferenceOffer?{...inferenceOffer}:null;},get dateInvitation(){return dateInvitation?{target:dateInvitation.target,spot:dateInvitation.spot,index:dateInvitation.index}:null;},get position(){return position;},begin,advance,save,load,playCredits,get endingCredits(){return endingCredits;},get portraitCollection(){return portraitCollection.summary();},displayField,namedChoicePeople,notebook,validation:report};
+window.HM_APP={get game(){return game;},get current(){return current;},get inferenceOffer(){return inferenceOffer?{...inferenceOffer}:null;},get dateInvitation(){return dateInvitation?{target:dateInvitation.target,spot:dateInvitation.spot,index:dateInvitation.index}:null;},get position(){return position;},begin,advance,save,load,playCredits,previewCredits,get endingCredits(){return endingCredits;},get portraitCollection(){return portraitCollection.summary();},displayField,namedChoicePeople,notebook,validation:report};
 })();

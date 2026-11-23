@@ -52,11 +52,12 @@
       shiori: ['塩の帳面はこっち。','別々に記録しとくから。'],
     };
     const colors = {twin:'#a8d9ef',ami:'#cbd9e8',yori:'#ebc18c',tsumugi:'#efbfa4',shiori:'#b9d8c7'};
+    const endingExpressions = {twin:'happy', ami:'happy', yori:'happy', tsumugi:'happy', shiori:'playful'};
     for (const person of global.HMV5Pilot.profiles) {
       const quotePhrases = lines[person.id];
       for (const gender of person.fixedArt ? ['female'] : ['female','male']) {
         const id = person.fixedArt || person.id + '-' + gender;
-        const image = assets.characters[id].expression.neutral;
+        const image = assets.characters[id].expression[endingExpressions[person.id]];
         credits.cast.splice(credits.cast.length - 1, 0, {
           id,gender,name:person[gender],image,accent:colors[person.id],
           quote:quotePhrases.join(''),quotePhrases,
